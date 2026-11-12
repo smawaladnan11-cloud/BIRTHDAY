@@ -1,0 +1,77 @@
+:root{
+  color-scheme:light;
+  --bg:#fff0a8;--bg2:#ff9fcf;--ink:#3a1a5c;--mute:#6b3f8f;--card:#fffdf5;
+  --pink:#ff5fa8;--lav:#8f7bff;--cream:#ffd84d;--flame:#ffb347;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+*{box-sizing:border-box;margin:0}
+html,body{min-height:100%}
+body{
+  background:linear-gradient(170deg,var(--bg),var(--bg2)) fixed;
+  color:var(--ink);
+  font:400 16px/1.5 Figtree,system-ui,sans-serif;
+  text-align:center;overflow-x:hidden;
+}
+
+/* bunting */
+.bunt{display:flex;justify-content:space-around;position:relative;z-index:2;padding:0 4px}
+.bunt:before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--ink);opacity:.25;border-radius:3px}
+.bunt span{width:min(11vw,44px);height:min(15vw,58px);clip-path:polygon(0 0,100% 0,50% 100%);margin-top:3px;transform-origin:50% 0;animation:sw 3s ease-in-out infinite alternate}
+.bunt span:nth-child(3n+1){background:var(--pink)}
+.bunt span:nth-child(3n+2){background:var(--lav)}
+.bunt span:nth-child(3n){background:var(--cream)}
+.bunt span:nth-child(even){animation-delay:-1.5s}
+@keyframes sw{to{transform:rotate(5deg)}}
+
+/* balloons */
+.bl{position:fixed;bottom:-140px;width:56px;height:70px;border-radius:50% 50% 48% 48%;z-index:0;opacity:.75;animation:rise linear infinite}
+.bl:after{content:"";position:absolute;left:50%;top:100%;width:1.5px;height:50px;background:var(--mute);opacity:.5}
+@keyframes rise{to{transform:translateY(-125vh) rotate(8deg)}}
+
+/* layout */
+main{position:relative;z-index:1;min-height:calc(100vh - 70px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:20px 18px 40px}
+h1{font:600 clamp(2.1rem,9vw,3.6rem)/1.1 Fraunces,Georgia,serif}
+
+/* buttons */
+button{font:inherit;color:inherit;cursor:pointer;border:0}
+button:focus-visible{outline:3px solid var(--lav);outline-offset:3px}
+.btn{padding:12px 24px;border-radius:99px;background:var(--pink);color:#4a2140;font-weight:600;box-shadow:0 8px 20px -10px var(--pink);transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.alt{background:#3fe0d0;color:#1b0f3a}
+
+/* cake */
+.cake{position:relative;width:min(300px,78vw);margin-top:62px}
+.candles{position:absolute;left:0;right:0;bottom:100%;display:flex;justify-content:space-evenly;padding:0 10px}
+.c{position:relative;width:12px;height:46px;border-radius:4px;background:repeating-linear-gradient(135deg,#fff 0 6px,var(--pink) 6px 12px);padding:0}
+.f{position:absolute;left:50%;bottom:100%;width:14px;height:24px;margin-left:-7px;background:radial-gradient(circle at 50% 70%,#fff6c8,var(--flame) 55%,#ff7a59);border-radius:50% 50% 50% 50%/65% 65% 35% 35%;transform-origin:50% 100%;animation:fl .35s ease-in-out infinite alternate;filter:drop-shadow(0 0 8px var(--flame));transition:opacity .3s}
+@keyframes fl{to{transform:rotate(5deg) scaleY(1.12)}}
+.c.out .f{opacity:0;animation:none}
+.s{position:absolute;left:50%;bottom:100%;font-size:18px;opacity:0;transform:translateX(-50%)}
+.c.out .s{animation:sm 1.4s ease-out}
+@keyframes sm{from{opacity:.8}to{opacity:0;transform:translate(-50%,-40px)}}
+.l{height:46px;border-radius:14px 14px 4px 4px;position:relative}
+.l1{background:var(--cream);width:70%;margin:0 auto}
+.l2{background:var(--pink);height:56px;width:86%;margin:0 auto}
+.l3{background:var(--lav);height:64px;border-radius:6px 6px 22px 22px}
+.l1:before,.l2:before{content:"";position:absolute;left:0;right:0;top:0;height:14px;background:radial-gradient(circle at 10px 0,var(--card) 10px,transparent 11px) 0 0/22px 14px repeat-x}
+.l3:after{content:"Hifza";position:absolute;inset:0;display:grid;place-items:center;font:italic 400 1.4rem Fraunces,serif;color:#fff}
+.plate{height:12px;border-radius:99px;background:var(--card);width:116%;margin:-2px -8%;box-shadow:0 10px 22px -10px rgba(80,40,100,.4)}
+
+/* gift, bouquet, note */
+.done{display:none;flex-direction:column;align-items:center;gap:12px}
+.done.on{display:flex;animation:in .6s}
+@keyframes in{from{opacity:0;transform:translateY(12px)}}
+.gift{font-size:4.5rem;background:none;line-height:1;animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px) rotate(5deg)}}
+.bq{width:min(240px,70vw);height:auto;overflow:visible}
+.fl{transform-box:fill-box;transform-origin:center;animation:bloom .8s cubic-bezier(.3,1.5,.5,1) both}
+@keyframes bloom{from{transform:scale(0) rotate(-40deg)}}
+.note{background:var(--card);border-radius:22px;padding:18px 22px;max-width:330px;font:italic 400 1.1rem/1.45 Fraunces,serif;box-shadow:0 14px 30px -18px rgba(80,40,100,.5);animation:in .6s 1.1s both}
+
+/* confetti */
+.cf{position:fixed;top:-30px;z-index:9;pointer-events:none;animation:fall 2.6s ease-in forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
